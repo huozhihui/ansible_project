@@ -1,0 +1,5 @@
+- hosts: deploy_vim
+  remote_user: root
+  #gather_facts: True
+  roles:
+    - vim

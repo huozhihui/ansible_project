@@ -1,0 +1,25 @@
+---
+  - name: "推送配置文件.vimrc"
+    template: src=vimrc dest=/root/.vimrc backup=yes
+
+  - name: "创建目录：/root/.vim"
+    file: path=/root/.vim state=directory
+
+  - name: "拷贝autoload文件夹"
+    synchronize:
+      mode: push 
+      src: "{{ role_path }}/files/autoload"
+      dest: /root/.vim/
+
+  - name: "拷贝vim常用插件"
+    synchronize:
+      mode: push 
+      src: "{{ role_path }}/files/bundle"
+      dest: /root/.vim/
+
+  
+      #- name: "同步插件目录"
+      #- synchronize:
+      #-   src: /tmp/sync_folder/
+      #-   dest: /tmp/sync_folder/
+      #-   delegate_to: 127.0.0.1
