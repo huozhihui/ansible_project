@@ -1,4 +1,4 @@
-- hosts: deploy_vim
+- hosts: vim
   remote_user: root
   #gather_facts: True
   roles:
