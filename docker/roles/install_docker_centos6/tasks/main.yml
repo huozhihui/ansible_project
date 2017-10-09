@@ -1,0 +1,27 @@
+---
+  - name: "创建缓存目录/tmp"
+    file: path=/tmp state=directory
+
+  - name: "拷贝{{ epel_release }}包"
+    synchronize:
+      mode: push 
+      src: "{{ role_path }}/files/{{ epel_release }}"
+      dest: /tmp
+
+  - name: "安装{{ epel_release }}包"
+    yum: name=/tmp/{{ epel_release }} state=present
+    #yum:
+      #name: http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+      #state: absent
+
+  - name: "更新系统所有包"
+    yum: name='*' state=latest
+
+  - name: "安装docker包"
+    yum: name=docker-io state=present
+
+  - name: "启动docker服务"
+    service: name=docker state=started enabled=yes
+
+  - name: "清除缓存文件"
+    file: path=/tmp/{{ epel_release }} state=absent
