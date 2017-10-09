@@ -1,5 +1,5 @@
-- hosts: vim
+- hosts: config_vim
   remote_user: root
   #gather_facts: True
   roles:
-    - vim
+    - config_vim
