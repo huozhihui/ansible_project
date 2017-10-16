@@ -1,0 +1,7 @@
+- hosts: install_flask
+  remote_user: root
+  gather_facts: False
+  roles:
+    - install_python
+    - install_pip
+    - install_flask

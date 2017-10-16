@@ -1,0 +1,35 @@
+---
+  - name: "安装相关库"
+    yum: name={{ item }} state=present
+    with_items:
+      - gcc
+      - gcc-c++ 
+      - autoconf 
+      - automake
+      - openssl
+      - openssl-devel 
+      - python-devel 
+      - libffi-devel
+
+  - name: "拷贝并解压python安装包"
+    unarchive:
+      src: "{{ role_path }}/files/{{ python }}.tgz"
+      dest: /tmp
+        
+  - name: "执行configure命令"
+    shell: ./configure --prefix={{ python_install_dir }}
+    args:
+      chdir: /tmp/{{ python }}
+
+  - name: "执行make命令"
+    shell: make -j8
+    args:
+      chdir: /tmp/{{ python }}
+
+  - name: "执行make install命令"
+    shell: make install
+    args:
+      chdir: /tmp/{{ python }}
+
+  - name: "删除缓存包"
+    file: name=/tmp/{{ python }} state=absent

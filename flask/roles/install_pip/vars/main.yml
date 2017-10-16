@@ -1,0 +1,4 @@
+---
+pip: pip-9.0.1
+setuptools: setuptools-36.6.0
+#wget_package: wget-1.12-10.el6.x86_64.rpm

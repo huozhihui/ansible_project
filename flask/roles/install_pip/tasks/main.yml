@@ -1,0 +1,38 @@
+---
+  - name: "拷贝并解压setuptools安装包"
+    unarchive:
+      src: "{{ role_path }}/files/{{ setuptools}}.zip"
+      dest: /tmp
+    tags:
+      - copy_setuptools 
+
+  - name: "安装setuptools"
+    shell: python setup.py install
+    args:
+      chdir: /tmp/{{ setuptools }}
+    tags:
+      - install_setuptools 
+
+
+  - name: "拷贝并解压pip安装包"
+    unarchive:
+      src: "{{ role_path }}/files/{{ pip }}.tar.gz"
+      dest: /tmp
+    tags:
+      - copy_pip
+
+  - name: "安装pip"
+    shell: python setup.py install
+    args: 
+      chdir: /tmp/{{ pip }}
+    tags:
+      - install_pip
+
+  - name: "删除缓存文件"
+    file: name=/tmp/{{ item }} state=absent
+    with_items:
+      - "{{ setuptools }}"
+      - "{{ pip }}"
+    tags:
+      - delete_tmp
+

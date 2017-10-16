@@ -1,0 +1,14 @@
+---
+  - name: "安装virtualenv包"
+    pip: name=virtualenv state=present
+
+  - name: "创建flask_demo目录"
+    file: path={{ flask_project }} state=directory
+
+  - name: "生成venv目录"
+    shell: virtualenv venv
+    args:
+      chdir: "{{ flask_project }}"
+    
+  - name: "安装flask包"
+    pip: name=flask state=present virtualenv={{ flask_project }}/venv
