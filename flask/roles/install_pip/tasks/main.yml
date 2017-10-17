@@ -13,7 +13,6 @@
     tags:
       - install_setuptools 
 
-
   - name: "拷贝并解压pip安装包"
     unarchive:
       src: "{{ role_path }}/files/{{ pip }}.tar.gz"
@@ -27,6 +26,11 @@
       chdir: /tmp/{{ pip }}
     tags:
       - install_pip
+
+  - name: "推送pip.conf文件"
+    template: src=pip.conf dest=/root/.pip/ backup=yes
+    tags:
+      - config_pip
 
   - name: "删除缓存文件"
     file: name=/tmp/{{ item }} state=absent
