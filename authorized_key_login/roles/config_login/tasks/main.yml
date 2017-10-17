@@ -1,0 +1,5 @@
+---
+  - name: 设置root免密登陆
+    authorized_key: user=root key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}" state=present
+    tags: 
+      - authorized_key
