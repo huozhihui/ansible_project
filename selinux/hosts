@@ -1,0 +1,7 @@
+[open_selinux]
+#10.50.1.150
+#10.50.1.150 ansible_connection=ssh ansible_ssh_user=root ansible_ssh_pass=Passw0rd
+10.50.1.114 ansible_connection=ssh ansible_ssh_user=root ansible_ssh_pass=Passw0rd
+
+[close_selinux]
+10.50.1.114 ansible_connection=ssh ansible_ssh_user=root ansible_ssh_pass=Passw0rd

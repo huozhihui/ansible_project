@@ -1,0 +1,15 @@
+---
+  - name: 开启selinux
+    lineinfile:
+      path: /etc/selinux/config
+      regexp: '^SELINUX='
+      line: 'SELINUX=enforcing'
+
+  - name: 测试lineinfile用法
+    lineinfile:
+      path: /root/abc
+      regexp: '^Linux'
+      insertbefore: '#Linux'
+      line: 'Linux=enforcing'
+    tags:
+      - test_lineinfile

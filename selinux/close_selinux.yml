@@ -1,0 +1,5 @@
+- hosts: close_selinux
+  remote_user: root
+  gather_facts: False
+  roles:
+    - close_selinux
